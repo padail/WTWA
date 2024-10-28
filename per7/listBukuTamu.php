@@ -1,6 +1,9 @@
 <?php
 include('conection.php');
 $data = mysqli_query($mysql, 'select * from bukuTamu');
+
+if($_GET){
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +19,7 @@ $data = mysqli_query($mysql, 'select * from bukuTamu');
             border: 1px solid black;
             border-collapse: collapse;
         }
+
         td {
             padding: 10px;
         }
@@ -31,6 +35,7 @@ $data = mysqli_query($mysql, 'select * from bukuTamu');
                 <th>Nama</th>
                 <th>Email</th>
                 <th>Komentar</th>
+                <th colspan="2">Act.</th>
             </tr>
         </thead>
         <tbody>
@@ -41,9 +46,12 @@ $data = mysqli_query($mysql, 'select * from bukuTamu');
                     <td><?= $row['nama']; ?></td>
                     <td><?= $row['email']; ?></td>
                     <td><?= $row['komentar']; ?></td>
+                    <td><a href="bukuTamu.php?id=<?= $row['idBukuTamu']; ?>">Update</a></td>
+                    <td><a href="delete.php?id=<?= $row['idBukuTamu']; ?>" onclick="return confirm('yakin mau di apus?')">Delete</a></td>
                 </tr>
             <?php $no++;
             }; ?>
+
         </tbody>
     </table>
 </body>

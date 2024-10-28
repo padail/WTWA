@@ -2,13 +2,18 @@
 include('conection.php');
 
 
+$id       = $_POST['id'] ?? null;
 $nama       = $_POST['nama'] ?? null;
 $email      = $_POST['email'] ?? null;
 $komentar   = $_POST['komentar'] ?? null;
-$sqlSave    = 'insert into bukuTamu (nama,email,komentar) values ("'.$nama.'","'.$email.'","'.$komentar.'")';
 
-$save       = mysqli_query($mysql,$sqlSave);
-if ($save){
+if (!$id) {
+    $sql = 'INSERT INTO bukuTamu (nama, email, komentar) VALUES ("' . $nama . '", "' . $email . '", "' . $komentar . '")';
+} else {
+    $sql = 'UPDATE bukuTamu SET nama = "' . $nama . '", email = "' . $email . '", komentar = "' . $komentar . '" WHERE idBukuTamu = ' . $id;
+}
+$act       = mysqli_query($mysql,$sql);
+if ($act){
 ?>
 <head>
     <meta charset="UTF-8">
